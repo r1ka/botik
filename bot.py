@@ -45,6 +45,11 @@ async def text(message: Message):
     await message.bot.send_message("Здарова!")
 
 
+@handlers(MessageType.TEXT, Contains("хуй"))
+async def text(message: Message):
+    await message.bot.send_message("У нас не матерятся!")
+
+
 async def run(token: str, proxy: str):
     client = MyClient(token, proxy, timeout=aiohttp.ClientTimeout(total=5))
 
