@@ -9,5 +9,6 @@
 2. Run: `make run`
 
 ## Docker
-1. Build container: `make docker`
-2. Run: `make docker-run`
+1. Download requirements: `make framework`
+2. Build container: `make docker`
+3. Run: `make docker-run`
