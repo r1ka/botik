@@ -37,7 +37,12 @@ async def command(message: Message):
 
 @handlers(MessageType.NEW_CHAT_MEMBERS)
 async def new_member(message: Message):
-    await message.bot.send_message("Приветствуем новичка! Шаурмы и донатов ему!)")
+    user = message.raw["message"]["new_chat_members"][0]
+    username = user.get("username")
+    name = " ".join([user[key] for key in ("first_name", "last_name") if key in user])
+    if username:
+        name = f"{name} (@{username})"
+    await message.bot.send_message(f"Приветствуем новичка {name}! Шаурмы и донатов ему!)")
 
 
 @handlers(MessageType.TEXT, Contains("конструктор"))
