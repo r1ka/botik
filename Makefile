@@ -19,7 +19,7 @@ install: venv framework
 run:
 	$(VENV_PATH)/bin/python bot.py
 
-docker:
+docker framework:
 	docker build -t botik  .
 
 docker-run:
