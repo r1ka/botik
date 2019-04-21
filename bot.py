@@ -32,17 +32,17 @@ class MyClient(Client):
 
 @handlers(MessageType.COMMAND, "/help")
 async def command(message: Message):
-    await message.bot.send_message("Бог тебе поможет")
+    await message.bot.send_message("Звоните в полицию!")
 
 
 @handlers(MessageType.NEW_CHAT_MEMBERS)
 async def new_member(message: Message):
-    await message.bot.send_message("Смотрите кто к нам колёса катит)")
+    await message.bot.send_message("Приветствуем новичка! Шаурмы и донатов ему!)")
 
 
-@handlers(MessageType.TEXT, Contains("привет"))
+@handlers(MessageType.TEXT, Contains("конструктор"))
 async def text(message: Message):
-    await message.bot.send_message("Здарова!")
+    await message.bot.send_message("Конструктор для m365 http://сяокат.рф/ru/konstruktor-proshivok конструктор для PRO http://сяокат.рф/ru/konstruktor-proshivok-pro")
 
 
 @handlers(MessageType.TEXT, Contains("хуй"))

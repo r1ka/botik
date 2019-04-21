@@ -23,4 +23,4 @@ docker:
 	docker build -t botik  .
 
 docker-run:
-	docker run -d -e TOKEN=$(TOKEN) -e PROXY=$(PROXY) botik
+	docker run -d --restart=always -e TOKEN=$(TOKEN) -e PROXY=$(PROXY) botik
