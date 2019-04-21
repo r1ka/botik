@@ -7,5 +7,12 @@
 ## Install
 `make install`
 
+## Before run
+Set environment variables
+
 ## Run
 `make run`
+
+## Run through docker
+1. `make docker`
+2. `make docker-run`

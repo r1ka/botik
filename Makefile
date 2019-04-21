@@ -17,4 +17,10 @@ install: venv framework
 	@$(VENV_PATH)/bin/pip install ./aio-telegram-bot
 
 run:
-	$(VENV_PATH)/bin/python bot.py --token=$(TOKEN) --proxy=$(PROXY)
+	$(VENV_PATH)/bin/python bot.py
+
+docker:
+	docker build -t botik  .
+
+docker-run:
+	docker run -d -e TOKEN=$(TOKEN) -e PROXY=$(PROXY) botik

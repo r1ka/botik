@@ -1,7 +1,7 @@
-import argparse
 import asyncio
 import aiohttp
 import logging
+import os
 from aiohttp.client_exceptions import ClientError
 from telegrambot import Client, Bot, Handlers, Message, MessageType
 from telegrambot.rules import Contains
@@ -56,8 +56,7 @@ async def run(token: str, proxy: str):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--token")
-    parser.add_argument("--proxy", default="")
-    args = parser.parse_args()
-    asyncio.run(run(args.token, args.proxy))
+    asyncio.run(run(
+        os.environ["TOKEN"],
+        os.environ.get("PROXY")
+    ))
