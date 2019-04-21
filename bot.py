@@ -4,7 +4,7 @@ import logging
 import os
 from aiohttp.client_exceptions import ClientError
 from telegrambot import Client, Bot, Handlers, Message, MessageType
-from telegrambot.rules import Contains
+from telegrambot.rules import Contains, RegExp
 
 logger = logging.getLogger(__name__)
 handlers = Handlers()
@@ -55,8 +55,8 @@ async def text(message: Message):
 @handlers(MessageType.TEXT, Contains("сокольники"))
 async def text(message: Message):
     await message.bot.send_message("32 павильон фарева")
-    
-@handlers(MessageType.TEXT, Contains("хуй"))
+
+@handlers(MessageType.TEXT, RegExp(".*(?i)(хуй|хуев|хуёв|пизда|пизде|ебат|ебан|джигурд).*"))
 async def text(message: Message):
     await message.bot.send_message("У нас не матерятся!")
 
