@@ -44,7 +44,18 @@ async def new_member(message: Message):
 async def text(message: Message):
     await message.bot.send_message("Конструктор для m365 http://сяокат.рф/ru/konstruktor-proshivok конструктор для PRO http://сяокат.рф/ru/konstruktor-proshivok-pro")
 
+@handlers(MessageType.TEXT, Contains("шаурма"))
+async def text(message: Message):
+    await message.bot.send_message("Лучшая шаурма в сокольниках!")
 
+@handlers(MessageType.TEXT, Contains("донаты"))
+async def text(message: Message):
+    await message.bot.send_message("Главный по донатам - @Afader")
+
+@handlers(MessageType.TEXT, Contains("сокольники"))
+async def text(message: Message):
+    await message.bot.send_message("32 павильон фарева")
+    
 @handlers(MessageType.TEXT, Contains("хуй"))
 async def text(message: Message):
     await message.bot.send_message("У нас не матерятся!")
