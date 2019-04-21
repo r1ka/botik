@@ -4,15 +4,10 @@
 - `TOKEN` – bot token. Required
 - `PROXY` – a proxy url in format `http://0.0.0.0:8080/`. Optional
 
-## Install
-`make install`
+## Local
+1. Install virtualenv and requirements: `make install`
+2. Run: `make run`
 
-## Before run
-Set environment variables
-
-## Run
-`make run`
-
-## Run through docker
-1. `make docker`
-2. `make docker-run`
+## Docker
+1. Build container: `make docker`
+2. Run: `make docker-run`
