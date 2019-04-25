@@ -1,6 +1,7 @@
 import asyncio
 import aiohttp
 import logging
+import random
 import os
 from aiohttp.client_exceptions import ClientError
 from telegrambot import Client, Bot, Handlers, Message, MessageType
@@ -30,40 +31,63 @@ class MyClient(Client):
             logger.exception("Error")
 
 
-@handlers(MessageType.COMMAND, "/help")
+@handlers.add(message_type=MessageType.COMMAND, rule="/help")
 async def command(message: Message):
-    await message.bot.send_message("Звоните в полицию!")
+    await message.bot.send_text("Звоните в полицию!")
 
 
-@handlers(MessageType.NEW_CHAT_MEMBERS)
+@handlers.add(message_type=MessageType.NEW_CHAT_MEMBERS)
 async def new_member(message: Message):
     user = message.raw["message"]["new_chat_members"][0]
     username = user.get("username")
     name = " ".join([user[key] for key in ("first_name", "last_name") if key in user])
     if username:
         name = f"{name} (@{username})"
-    await message.bot.send_message(f"Приветствуем новичка {name}! Шаурмы и донатов ему!)")
+    await message.bot.send_text(f"Приветствуем новичка {name}! Шаурмы и донатов ему!)")
 
 
-@handlers(MessageType.TEXT, Contains("конструктор"))
+@handlers.add(
+    message_type=MessageType.TEXT,
+    rule=Contains("конструктор"),
+    pause=10*60  # 10 minutes
+)
 async def text(message: Message):
-    await message.bot.send_message("Конструктор для m365 http://сяокат.рф/ru/konstruktor-proshivok конструктор для PRO http://сяокат.рф/ru/konstruktor-proshivok-pro")
+    await message.bot.send_text("Конструктор для m365 http://сяокат.рф/ru/konstruktor-proshivok конструктор для PRO http://сяокат.рф/ru/konstruktor-proshivok-pro")
 
-@handlers(MessageType.TEXT, Contains("шаурма"))
-async def text(message: Message):
-    await message.bot.send_message("Лучшая шаурма в сокольниках!")
 
-@handlers(MessageType.TEXT, Contains("донаты"))
+@handlers.add(
+    message_type=MessageType.TEXT,
+    rule=Contains("шаурм"),
+    pause=60*60  # 1 hour
+)
 async def text(message: Message):
-    await message.bot.send_message("Главный по донатам - @Afader")
+    await message.bot.send_text("Лучшая шаурма в сокольниках!")
 
-@handlers(MessageType.TEXT, Contains("сокольники"))
-async def text(message: Message):
-    await message.bot.send_message("32 павильон фарева")
 
-@handlers(MessageType.TEXT, RegExp(".*(?i)(хуй|хуев|хуёв|пизда|пизде|ебат|ебан|джигурд).*"))
+@handlers.add(message_type=MessageType.TEXT, rule=Contains("донат"))
 async def text(message: Message):
-    await message.bot.send_message("У нас не матерятся!")
+    await message.bot.send_text("Главный по донатам – @Afader")
+
+
+@handlers.add(
+    message_type=MessageType.TEXT,
+    rule=Contains("сокольники"),
+    pause=30*60  # 30 minutes
+)
+async def text(message: Message):
+    await message.bot.send_text("32 павильон фарева")
+
+
+@handlers.add(
+    message_type=MessageType.TEXT,
+    rule=RegExp(".*(?i)(хуй|хуев|хуёв|хуен|охуе|пизда|пиздя|пиздо|пизде|ебат|ебан|ебал|гандон|джигурд|дроч|пидор|пидр|бля).*"),
+    pause=15*60  # 15 minutes
+)
+async def text(message: Message):
+    await message.bot.send_text(random.choice([
+        "У нас не матерятся!",
+        "Можно было бы и культурнее сказать)"
+    ]))
 
 
 async def run(token: str, proxy: str):

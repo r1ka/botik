@@ -4,7 +4,7 @@ WORKDIR /app
 
 RUN git clone https://github.com/v-v-vishnevskiy/aio-telegram-bot.git
 WORKDIR aio-telegram-bot
-RUN git checkout 29c1ccf8fe97880d86d237b80ea32196b6a2188c
+RUN git checkout bd30ba20cfbd2a5297d383b5c4099060d86db879
 RUN pip install ./
 WORKDIR /app
 

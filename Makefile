@@ -10,7 +10,7 @@ venv:
 
 framework:
 	@git clone https://github.com/v-v-vishnevskiy/aio-telegram-bot.git
-	@cd aio-telegram-bot && git checkout 29c1ccf8fe97880d86d237b80ea32196b6a2188c
+	@cd aio-telegram-bot && git checkout bd30ba20cfbd2a5297d383b5c4099060d86db879
 
 .PHONY: install
 install: venv framework
