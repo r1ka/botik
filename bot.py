@@ -33,8 +33,15 @@ class MyClient(Client):
 
 @handlers.add(message_type=MessageType.COMMAND, rule="/help")
 async def command(message: Message):
-    await message.bot.send_text("Звоните в полицию!")
+    await message.bot.send_message("Вот такие команды есть у бота:\n/rules - правила\n/links - полезные ссылки\n/help - список команд")
 
+@handlers.add(message_type=MessageType.COMMAND, rule="/links")
+async def command(message: Message):
+    await message.bot.send_message("Полезные ссылки:\nhttps://ru.aliexpress.com/item/32792513237.html?spm=a2g0v.search0604.3.2.6f297762FPjzfv - STLink программатор\nhttps://ru.nkon.nl/ - Магазин с качественными аккумуляторами 18650\nhttps://www.lithiumbatterypcb.com/product/13s-48v-li-ion-battery-pcb-board-54-6v-lithium-bms-with-60a-discharge-current-for-electric-motorcycle-and-e-scooter-protection-2-2-3-2-2-2-2-2/ - Совместимая мощная BMS")
+
+@handlers.add(message_type=MessageType.COMMAND, rule="/rules")
+async def command(message: Message):
+    await message.bot.send_message("1) Запрещается публикация порноматериалов и любой информации, распространение которой запрещено законами РФ, рекламы не связанной с электротранспортом, обсуждение политики.\n\n2) Мат - это прекрасно. Но постарайтесь, пожалуйста, использовать его безадресно чтобы кого-то случайно не оскорбить.")
 
 @handlers.add(message_type=MessageType.NEW_CHAT_MEMBERS)
 async def new_member(message: Message):
@@ -43,13 +50,12 @@ async def new_member(message: Message):
     name = " ".join([user[key] for key in ("first_name", "last_name") if key in user])
     if username:
         name = f"{name} (@{username})"
-    await message.bot.send_text(f"Приветствуем новичка {name}! Шаурмы и донатов ему!)")
-
+    await message.bot.send_message(f"Привет, {name}! Шаурмы и донатов тебе! Если у тебя есть вопрос по самокату, то сначала воспользуйся поиском по чату, большинство вопросов уже обсуждалось. Если поиск не помог, то постарайся задать свой вопрос грамотно и указать максимальное количество подробностей (напр. какая версия прошивки сейчас стоит, что уже пробовал делать и т.п.)\n\nДоступные команды бота:\n/rules - правила\n/links - полезные ссылки\n/help - список команд")
 
 @handlers.add(
     message_type=MessageType.TEXT,
     rule=Contains("конструктор"),
-    pause=10*60  # 10 minutes
+    #pause=10*60  # 10 minutes
 )
 async def text(message: Message):
     await message.bot.send_text("Конструктор для m365 http://сяокат.рф/ru/konstruktor-proshivok конструктор для PRO http://сяокат.рф/ru/konstruktor-proshivok-pro")
@@ -58,7 +64,7 @@ async def text(message: Message):
 @handlers.add(
     message_type=MessageType.TEXT,
     rule=Contains("шаурм"),
-    pause=60*60  # 1 hour
+    #pause=60*60  # 1 hour
 )
 async def text(message: Message):
     await message.bot.send_text("Лучшая шаурма в сокольниках!")
@@ -72,7 +78,7 @@ async def text(message: Message):
 @handlers.add(
     message_type=MessageType.TEXT,
     rule=Contains("сокольники"),
-    pause=30*60  # 30 minutes
+    #pause=30*60  # 30 minutes
 )
 async def text(message: Message):
     await message.bot.send_text("32 павильон фарева")
@@ -81,7 +87,7 @@ async def text(message: Message):
 @handlers.add(
     message_type=MessageType.TEXT,
     rule=RegExp(".*(?i)(хуй|хуев|хуёв|хуен|охуе|пизда|пиздя|пиздо|пизде|ебат|ебан|ебал|гандон|джигурд|дроч|пидор|пидр|бля).*"),
-    pause=15*60  # 15 minutes
+    #pause=15*60  # 15 minutes
 )
 async def text(message: Message):
     await message.bot.send_text(random.choice([
